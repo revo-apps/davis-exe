@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAVIS AI v1.0 PRO</title>
+    <link rel="icon" href="/favicon.ico">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Arial', sans-serif;
+            padding-top: 10px;
+            padding-bottom: 25px;
+        }
+
+        body.pranked {
+            cursor: none;
+        }
+        
+        header {
+            margin-top: 20px;
+            margin-bottom: 90px;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            font-size: 20px;
+            text-align: center;
+        }
+        
+        p {
+            line-height: 30px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            background: #fff;
+            height: 230px;
+            width: 310px;
+            padding: 50px;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            border: #aaa solid 3px;
+            border-radius: 40px;
+            box-shadow: -7px 10px 10px #555;
+        }
+
+        button {
+            padding: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            background: #ff6b6b;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        footer {
+            color: #fff;
+            margin-top: 190px;
+        }
+
+        .prank-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .prank-overlay.active {
+            display: flex;
+        }
+
+        .virus-warning {
+            color: #ff0000;
+            font-size: 48px;
+            font-weight: bold;
+            text-shadow: 0 0 20px rgba(255, 0, 0, 0.7);
+            opacity: 0;
+            animation: fadeIn 0.5s ease-in forwards, fadeOut 0.5s ease-out forwards;
+            animation-delay: 0s, 4s;
+        }
+
+        .prank-message {
+            color: white;
+            font-size: 60px;
+            font-weight: bold;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            opacity: 0;
+        }
+
+        .prank-message.show {
+            opacity: 1;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <header>
+    <h1>DAVIS AI</h1><br>
+    <p>The all purpose artificial intelligence tool</p>
+    <p>Code in any language—HTML, CSS, JavaScript, Python, etc.—generate images, learn  new information, and much, much more—all for free!</p>
+    <p>For work or personal use</p>
+    </header>
+    <div class="container">
+        <h2>Download, install, and enjoy Davis</h2><br>
+        <button onclick="downloadFile()">DOWNLOAD</button>
+    </div>
+
+    <div class="prank-overlay" id="prankOverlay">
+        <div class="virus-warning">A virus has entered and will destroy your computer</div>
+        <div class="prank-message" id="prankMessage">You got pranked! 😄</div>
+    </div>
+
+    <footer>&copy; Copyright 2026 Revo Apps</footer>
+
+    <script>
+        function downloadFile() {
+            const link = document.createElement('a');
+            link.href = 'davis.exe';
+            link.download = 'davis.exe';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function startPrank() {
+            setTimeout(() => {
+                const overlay = document.getElementById('prankOverlay');
+                const message = document.getElementById('prankMessage');
+
+                // Hide the cursor
+                document.body.classList.add('pranked');
+
+                // Show the black screen first
+                overlay.classList.add('active');
+
+                // Request fullscreen
+                const elem = document.documentElement;
+                if (elem.requestFullscreen) {
+                    elem.requestFullscreen().catch(() => {});
+                } else if (elem.webkitRequestFullscreen) {
+                    elem.webkitRequestFullscreen();
+                } else if (elem.mozRequestFullScreen) {
+                    elem.mozRequestFullScreen();
+                } else if (elem.msRequestFullscreen) {
+                    elem.msRequestFullscreen();
+                }
+
+                // Show the prank message after 25 seconds
+                setTimeout(() => {
+                    message.classList.add('show');
+                }, 25000);
+
+                // Go to previous tab
+                setTimeout(() => {
+                    window.history.back();
+                }, 30000);
+            }, 2000);
+        }
+    </script>
+</body>
+
+</html>
